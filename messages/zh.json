@@ -1,0 +1,101 @@
+{
+    "Navbar": {
+        "brand": "WAKnowledgeBot",
+        "features": "功能特性",
+        "demo": "演示",
+        "pricing": "价格",
+        "getStarted": "立即开始"
+    },
+    "Hero": {
+        "titleLine1": "连接您的业务与",
+        "titleHighlight": "智能 WhatsApp AI",
+        "description": "利用多模态 RAG 技术赋能您的客户支持。全天候自动响应，处理语音消息和图像内容。",
+        "ctaPrimary": "开始免费试用",
+        "ctaSecondary": "查看演示"
+    },
+    "WhatsAppSimulator": {
+        "title": "多模态 AI 体验",
+        "description": "体验直接在 WhatsApp 中通过 RAG 处理文本、语音和图像的强大功能。",
+        "botName": "WAKnowledgeBot",
+        "status": "在线",
+        "inputPlaceholder": "消息",
+        "messages": {
+            "user1": "嗨，能帮我分析一下这个销售图表吗？",
+            "bot1": "当然！根据图表显示，第三季度收入同比增长了 40%。增长主要得益于七月份的新产品发布。",
+            "bot2": "是的，看趋势线，如果目前的势头持续下去，我们预计第四季度将进一步增长 15%。"
+        }
+    },
+    "RAGVisualizer": {
+        "title": "RAG 技术运作原理",
+        "description": "您的数据被安全索引，并在几秒钟内转化为准确的回答。",
+        "steps": {
+            "source": {
+                "label": "知识来源",
+                "desc": "PDF, 文档, 网页"
+            },
+            "vector": {
+                "label": "向量数据库",
+                "desc": "嵌入存储"
+            },
+            "ai": {
+                "label": "AI 处理",
+                "desc": "检索与生成"
+            },
+            "response": {
+                "label": "WhatsApp 响应",
+                "desc": "准确回答"
+            }
+        }
+    },
+    "Pricing": {
+        "title": "简单透明的价格",
+        "description": "选择适合您业务需求的方案。",
+        "plans": {
+            "starter": {
+                "name": "入门版",
+                "desc": "适合刚刚开始使用 AI 的小型企业。",
+                "cta": "立即开始",
+                "features": {
+                    "messages": "500 条消息 / 月",
+                    "kb": "1 个知识库",
+                    "support": "仅文本支持",
+                    "email": "邮件支持"
+                }
+            },
+            "pro": {
+                "name": "专业版",
+                "desc": "适合需要多模态功能的成长型团队。",
+                "cta": "升级专业版",
+                "popular": "最受欢迎",
+                "features": {
+                    "messages": "无限消息",
+                    "kb": "5 个知识库",
+                    "multimodal": "支持文本、语音和图像",
+                    "priority": "优先支持",
+                    "api": "API 访问"
+                }
+            },
+            "enterprise": {
+                "name": "企业版",
+                "desc": "为大型组织量身定制的解决方案。",
+                "cta": "联系销售",
+                "price": "定制",
+                "features": {
+                    "deployment": "定制部署",
+                    "manager": "专属客户经理",
+                    "integration": "定制集成",
+                    "sla": "SLA 服务保障"
+                }
+            }
+        }
+    },
+    "Footer": {
+        "brandDesc": "您的 WhatsApp 业务智能 AI 助手。利用多模态 RAG 技术赋能您的客户支持。",
+        "product": "产品",
+        "company": "公司",
+        "about": "关于我们",
+        "privacy": "隐私政策",
+        "terms": "服务条款",
+        "rights": "版权所有。"
+    }
+}

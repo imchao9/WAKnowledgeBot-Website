@@ -2,28 +2,31 @@
 
 import { motion } from 'framer-motion';
 import { Database, FileText, Bot, ArrowRight, BrainCircuit } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export default function RAGVisualizer() {
+    const t = useTranslations('RAGVisualizer');
+
     const steps = [
         {
             icon: <FileText className="w-8 h-8 text-blue-500" />,
-            label: 'Knowledge Source',
-            desc: 'PDFs, Docs, Web'
+            label: t('steps.source.label'),
+            desc: t('steps.source.desc')
         },
         {
             icon: <Database className="w-8 h-8 text-purple-500" />,
-            label: 'Vector Database',
-            desc: 'Embeddings Storage'
+            label: t('steps.vector.label'),
+            desc: t('steps.vector.desc')
         },
         {
             icon: <BrainCircuit className="w-8 h-8 text-whatsapp" />,
-            label: 'AI Processing',
-            desc: 'Retrieval & Generation'
+            label: t('steps.ai.label'),
+            desc: t('steps.ai.desc')
         },
         {
             icon: <Bot className="w-8 h-8 text-green-600" />,
-            label: 'WhatsApp Response',
-            desc: 'Accurate Answers'
+            label: t('steps.response.label'),
+            desc: t('steps.response.desc')
         },
     ];
 
@@ -32,10 +35,10 @@ export default function RAGVisualizer() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                        How RAG Technology Works
+                        {t('title')}
                     </h2>
                     <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                        Your data is securely indexed turned into accurate responses in seconds.
+                        {t('description')}
                     </p>
                 </div>
 

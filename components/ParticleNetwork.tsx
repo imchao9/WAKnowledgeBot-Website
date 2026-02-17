@@ -1,14 +1,15 @@
 'use client';
 
 import { useRef, useMemo } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Points, PointMaterial, Line } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+
+/* eslint-disable react-hooks/purity */
 
 function Particles({ count = 200 }) {
     const points = useMemo(() => {
         const p = new Float32Array(count * 3);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+
         for (let i = 0; i < count; i++) {
             const theta = THREE.MathUtils.randFloatSpread(360);
             const phi = THREE.MathUtils.randFloatSpread(360);
@@ -23,37 +24,42 @@ function Particles({ count = 200 }) {
             p[i * 3 + 2] = z;
         }
         return p;
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [count]);
 
     const ref = useRef<THREE.Points>(null!);
 
-    useFrame((state, delta) => {
+    useFrame((state) => {
         if (ref.current) {
-            ref.current.rotation.x -= delta / 10;
-            ref.current.rotation.y -= delta / 15;
+            ref.current.rotation.x = state.clock.getElapsedTime() * 0.05;
+            ref.current.rotation.y = state.clock.getElapsedTime() * 0.05;
         }
     });
 
     return (
-        <group rotation={[0, 0, Math.PI / 4]}>
-            <Points ref={ref} positions={points} stride={3} frustumCulled={false}>
-                <PointMaterial
-                    transparent
-                    color="#00A884"
-                    size={0.15}
-                    sizeAttenuation={true}
-                    depthWrite={false}
+        <points ref={ref}>
+            <bufferGeometry>
+                <bufferAttribute
+                    attach="attributes-position"
+                    count={points.length / 3}
+                    array={points}
+                    itemSize={3}
+                    args={[points, 3]}
                 />
-            </Points>
-        </group>
+            </bufferGeometry>
+            <pointsMaterial
+                size={0.1}
+                color="#25D366"
+                transparent
+                opacity={0.6}
+                sizeAttenuation={true}
+            />
+        </points>
     );
 }
 
-// Simple connections for visual effect - simplified to static lines for performance
-function Connections({ count = 50 }) {
+function Connections({ count = 100 }) {
     const lines = useMemo(() => {
-        const points = [];
+        const points: THREE.Vector3[] = [];
         for (let i = 0; i < count; i++) {
             const start = new THREE.Vector3(
                 (Math.random() - 0.5) * 20,
@@ -71,39 +77,60 @@ function Connections({ count = 50 }) {
                 points.push(end);
             }
         }
-        return points;
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+
+        const linePositions = new Float32Array(points.length * 3);
+        for (let i = 0; i < points.length; i++) {
+            linePositions[i * 3] = points[i].x;
+            linePositions[i * 3 + 1] = points[i].y;
+            linePositions[i * 3 + 2] = points[i].z;
+        }
+        return linePositions;
     }, [count]);
+
 
     const ref = useRef<THREE.Group>(null!);
 
-    useFrame((state, delta) => {
+    useFrame((state) => {
         if (ref.current) {
-            ref.current.rotation.x -= delta / 10;
-            ref.current.rotation.y -= delta / 15;
+            ref.current.rotation.x = -state.clock.getElapsedTime() * 0.02;
+            ref.current.rotation.y = -state.clock.getElapsedTime() * 0.02;
         }
     });
 
     return (
         <group ref={ref}>
-            <Line
-                points={lines}
-                color="#00A884"
-                opacity={0.15}
-                transparent
-                lineWidth={0.5}
-            />
+            <lineSegments>
+                <bufferGeometry>
+                    <bufferAttribute
+                        attach="attributes-position"
+                        count={lines.length / 3}
+                        array={lines}
+                        itemSize={3}
+                        args={[lines, 3]}
+                    />
+                </bufferGeometry>
+                <lineBasicMaterial
+                    color="#25D366"
+                    transparent
+                    opacity={0.15}
+                    linewidth={1}
+                />
+            </lineSegments>
         </group>
     );
 }
 
+import { Canvas } from '@react-three/fiber';
+
 export default function ParticleNetwork() {
     return (
-        <div className="absolute inset-0 -z-10 h-full w-full bg-slate-50">
+        <div className="absolute inset-0 -z-10">
             <Canvas camera={{ position: [0, 0, 20], fov: 75 }}>
                 <ambientLight intensity={0.5} />
-                <Particles count={200} />
-                <Connections count={100} />
+                <group>
+                    <Particles />
+                    <Connections />
+                </group>
             </Canvas>
         </div>
     );

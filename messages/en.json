@@ -1,0 +1,101 @@
+{
+    "Navbar": {
+        "brand": "WAKnowledgeBot",
+        "features": "Features",
+        "demo": "Demo",
+        "pricing": "Pricing",
+        "getStarted": "Get Started"
+    },
+    "Hero": {
+        "titleLine1": "Connect Your Business with",
+        "titleHighlight": "Intelligent WhatsApp AI",
+        "description": "Empower your customer support with Multimodal RAG technology. Automate responses, handle voice notes, and process images 24/7.",
+        "ctaPrimary": "Start Free Trial",
+        "ctaSecondary": "View Demo"
+    },
+    "WhatsAppSimulator": {
+        "title": "Multimodal AI Experience",
+        "description": "Experience the power of RAG with text, voice, and image understanding directly in WhatsApp.",
+        "botName": "WAKnowledgeBot",
+        "status": "Online",
+        "inputPlaceholder": "Message",
+        "messages": {
+            "user1": "Hi, can you help me analyze this sales chart?",
+            "bot1": "Absolutely! Based on the chart, Q3 revenue shows a 40% increase year-over-year. The growth is primarily driven by the new product launch in July.",
+            "bot2": "Yes, looking at the trend line, if the current momentum continues, we project a 15% further increase in Q4."
+        }
+    },
+    "RAGVisualizer": {
+        "title": "How RAG Technology Works",
+        "description": "Your data is securely indexed turned into accurate responses in seconds.",
+        "steps": {
+            "source": {
+                "label": "Knowledge Source",
+                "desc": "PDFs, Docs, Web"
+            },
+            "vector": {
+                "label": "Vector Database",
+                "desc": "Embeddings Storage"
+            },
+            "ai": {
+                "label": "AI Processing",
+                "desc": "Retrieval & Generation"
+            },
+            "response": {
+                "label": "WhatsApp Response",
+                "desc": "Accurate Answers"
+            }
+        }
+    },
+    "Pricing": {
+        "title": "Simple, Transparent Pricing",
+        "description": "Choose the plan that fits your business needs.",
+        "plans": {
+            "starter": {
+                "name": "Starter",
+                "desc": "Perfect for small businesses starting with AI.",
+                "cta": "Get Started",
+                "features": {
+                    "messages": "500 Messages / month",
+                    "kb": "1 Knowledge Base",
+                    "support": "Text Support Only",
+                    "email": "Email Support"
+                }
+            },
+            "pro": {
+                "name": "Pro",
+                "desc": "For growing teams needing multimodal capabilities.",
+                "cta": "Go Pro",
+                "popular": "POPULAR",
+                "features": {
+                    "messages": "Unlimited Messages",
+                    "kb": "5 Knowledge Bases",
+                    "multimodal": "Text, Voice & Image",
+                    "priority": "Priority Support",
+                    "api": "API Access"
+                }
+            },
+            "enterprise": {
+                "name": "Enterprise",
+                "desc": "Tailored solutions for large organizations.",
+                "cta": "Contact Sales",
+                "price": "Custom",
+                "features": {
+                    "deployment": "Custom Deployment",
+                    "manager": "Dedicated Account Manager",
+                    "integration": "Custom Integration",
+                    "sla": "SLA Support"
+                }
+            }
+        }
+    },
+    "Footer": {
+        "brandDesc": "The intelligent AI assistant for your WhatsApp business. Empower your customer support with Multimodal RAG technology.",
+        "product": "Product",
+        "company": "Company",
+        "about": "About",
+        "privacy": "Privacy",
+        "terms": "Terms",
+        "rights": "All rights reserved."
+    }
+}

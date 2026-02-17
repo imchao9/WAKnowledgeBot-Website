@@ -2,66 +2,64 @@
 
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
-
+import { useTranslations } from 'next-intl';
 
 import { createCheckoutSession } from '@/app/actions';
 
-// Initialize Stripe (publishable key should be in env vars, but hardcoding placeholder for now or using env)
-// const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
-
-const plans = [
-    {
-        name: 'Starter',
-        price: '$29',
-        period: '/month',
-        priceId: 'price_starter_placeholder',
-        description: 'Perfect for small businesses starting with AI.',
-        features: [
-            '500 Messages / month',
-            '1 Knowledge Base',
-            'Text Support Only',
-            'Email Support',
-        ],
-        cta: 'Get Started',
-        popular: false,
-    },
-    {
-        name: 'Pro',
-        price: '$99',
-        period: '/month',
-        priceId: 'price_pro_placeholder',
-        description: 'For growing teams needing multimodal capabilities.',
-        features: [
-            'Unlimited Messages',
-            '5 Knowledge Bases',
-            'Text, Voice & Image',
-            'Priority Support',
-            'API Access'
-        ],
-        cta: 'Go Pro',
-        popular: true,
-    },
-    {
-        name: 'Enterprise',
-        price: 'Custom',
-        period: '',
-        priceId: 'price_enterprise_placeholder', // Contact sales usually, but for demo
-        description: 'Tailored solutions for large organizations.',
-        features: [
-            'Custom Deployment',
-            'Dedicated Account Manager',
-            'Custom Integration',
-            'SLA Support',
-        ],
-        cta: 'Contact Sales',
-        popular: false,
-    },
-];
-
 export default function Pricing() {
+    const t = useTranslations('Pricing');
+
+    const plans = [
+        {
+            name: t('plans.starter.name'),
+            price: '$29',
+            period: '/month',
+            priceId: 'price_starter_placeholder',
+            description: t('plans.starter.desc'),
+            features: [
+                t('plans.starter.features.messages'),
+                t('plans.starter.features.kb'),
+                t('plans.starter.features.support'),
+                t('plans.starter.features.email'),
+            ],
+            cta: t('plans.starter.cta'),
+            popular: false,
+        },
+        {
+            name: t('plans.pro.name'),
+            price: '$99',
+            period: '/month',
+            priceId: 'price_pro_placeholder',
+            description: t('plans.pro.desc'),
+            features: [
+                t('plans.pro.features.messages'),
+                t('plans.pro.features.kb'),
+                t('plans.pro.features.multimodal'),
+                t('plans.pro.features.priority'),
+                t('plans.pro.features.api')
+            ],
+            cta: t('plans.pro.cta'),
+            popular: true,
+        },
+        {
+            name: t('plans.enterprise.name'),
+            price: t('plans.enterprise.price'),
+            period: '',
+            priceId: 'price_enterprise_placeholder',
+            description: t('plans.enterprise.desc'),
+            features: [
+                t('plans.enterprise.features.deployment'),
+                t('plans.enterprise.features.manager'),
+                t('plans.enterprise.features.integration'),
+                t('plans.enterprise.features.sla'),
+            ],
+            cta: t('plans.enterprise.cta'),
+            popular: false,
+        },
+    ];
+
     const handleCheckout = async (priceId: string) => {
         if (priceId.includes('enterprise')) {
-            // Handle enterprise contact logic
             console.log('Contact sales for Enterprise');
             return;
         }
@@ -73,10 +71,10 @@ export default function Pricing() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                        Simple, Transparent Pricing
+                        {t('title')}
                     </h2>
                     <p className="text-xl text-gray-600">
-                        Choose the plan that fits your business needs.
+                        {t('description')}
                     </p>
                 </div>
 
@@ -93,7 +91,7 @@ export default function Pricing() {
                         >
                             {plan.popular && (
                                 <div className="absolute top-0 right-0 bg-whatsapp text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
-                                    POPULAR
+                                    {t('plans.pro.popular')}
                                 </div>
                             )}
 

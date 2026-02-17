@@ -3,55 +3,58 @@
 import { motion } from 'framer-motion';
 import { Mic, Paperclip, MoreVertical, Phone, Video, Camera } from 'lucide-react';
 import Image from 'next/image';
-
-const messages = [
-    {
-        id: 1,
-        sender: 'user',
-        type: 'text',
-        content: 'Hi, can you help me analyze this sales chart?',
-        time: '10:30 AM',
-    },
-    {
-        id: 2,
-        sender: 'user',
-        type: 'image',
-        content: '/chart-placeholder.png', // We need a placeholder or CSS chart
-        time: '10:31 AM',
-    },
-    {
-        id: 3,
-        sender: 'bot',
-        type: 'text',
-        content: 'Absolutely! Based on the chart, Q3 revenue shows a 40% increase year-over-year. The growth is primarily driven by the new product launch in July.',
-        time: '10:31 AM',
-    },
-    {
-        id: 4,
-        sender: 'user',
-        type: 'audio',
-        duration: '0:15',
-        time: '10:32 AM',
-    },
-    {
-        id: 5,
-        sender: 'bot',
-        type: 'text',
-        content: 'Yes, looking at the trend line, if the current momentum continues, we project a 15% further increase in Q4.',
-        time: '10:32 AM',
-    },
-];
+import { useTranslations } from 'next-intl';
 
 export default function WhatsAppSimulator() {
+    const t = useTranslations('WhatsAppSimulator');
+
+    const messages = [
+        {
+            id: 1,
+            sender: 'user',
+            type: 'text',
+            content: t('messages.user1'),
+            time: '10:30 AM',
+        },
+        {
+            id: 2,
+            sender: 'user',
+            type: 'image',
+            content: '/chart-placeholder.png', // We need a placeholder or CSS chart
+            time: '10:31 AM',
+        },
+        {
+            id: 3,
+            sender: 'bot',
+            type: 'text',
+            content: t('messages.bot1'),
+            time: '10:31 AM',
+        },
+        {
+            id: 4,
+            sender: 'user',
+            type: 'audio',
+            duration: '0:15',
+            time: '10:32 AM',
+        },
+        {
+            id: 5,
+            sender: 'bot',
+            type: 'text',
+            content: t('messages.bot2'),
+            time: '10:32 AM',
+        },
+    ];
+
     return (
         <section id="demo" className="py-24 bg-gray-50 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                        Multimodal AI Experience
+                        {t('title')}
                     </h2>
                     <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                        Experience the power of RAG with text, voice, and image understanding directly in WhatsApp.
+                        {t('description')}
                     </p>
                 </div>
 
@@ -74,8 +77,8 @@ export default function WhatsAppSimulator() {
                                     Bot
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-sm">WAKnowledgeBot</h3>
-                                    <p className="text-xs text-white/80">Online</p>
+                                    <h3 className="font-semibold text-sm">{t('botName')}</h3>
+                                    <p className="text-xs text-white/80">{t('status')}</p>
                                 </div>
                             </div>
                             <div className="flex gap-4">
@@ -109,6 +112,7 @@ export default function WhatsAppSimulator() {
                                                     src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=400"
                                                     alt="Sales Chart"
                                                     fill
+                                                    unoptimized
                                                     className="object-cover opacity-80 group-hover:opacity-100 transition-opacity"
                                                 />
                                                 <div className="absolute inset-0 bg-black/5 flex items-center justify-center">
@@ -143,7 +147,7 @@ export default function WhatsAppSimulator() {
                                 <MoreVertical className="w-6 h-6 text-gray-500 rotate-90" /> {/* Simulate + icon */}
                             </div>
                             <div className="flex-1 bg-white rounded-lg px-4 py-2 text-sm text-gray-500 shadow-sm flex items-center justify-between">
-                                <span>Message</span>
+                                <span>{t('inputPlaceholder')}</span>
                                 <Paperclip className="w-5 h-5 text-gray-400 rotate-45" />
                             </div>
                             <div className="p-2 bg-[#00a884] rounded-full text-white">

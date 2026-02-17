@@ -1,10 +1,15 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
-import ParticleNetwork from './ParticleNetwork';
+import { Link } from '@/navigation';
+import { useTranslations } from 'next-intl';
+import dynamic from 'next/dynamic';
+
+const ParticleNetwork = dynamic(() => import('./ParticleNetwork'), { ssr: false });
 
 export default function Hero() {
+    const t = useTranslations('Hero');
+
     return (
         <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
             {/* 3D Background */}
@@ -18,8 +23,8 @@ export default function Hero() {
                     transition={{ duration: 0.8, delay: 0.2 }}
                 >
                     <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 tracking-tight mb-4">
-                        Connect Your Business with <br />
-                        <span className="text-whatsapp">Intelligent WhatsApp AI</span>
+                        {t('titleLine1')} <br />
+                        <span className="text-whatsapp">{t('titleHighlight')}</span>
                     </h1>
                 </motion.div>
 
@@ -29,8 +34,7 @@ export default function Hero() {
                     transition={{ duration: 0.8, delay: 0.4 }}
                 >
                     <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-600">
-                        Empower your customer support with Multimodal RAG technology.
-                        Automate responses, handle voice notes, and process images 24/7.
+                        {t('description')}
                     </p>
                 </motion.div>
 
@@ -44,13 +48,13 @@ export default function Hero() {
                         href="#pricing"
                         className="px-8 py-3 rounded-full bg-whatsapp text-white font-semibold text-lg hover:bg-whatsapp-dark transition-all shadow-lg hover:shadow-cyan-500/20"
                     >
-                        Start Free Trial
+                        {t('ctaPrimary')}
                     </Link>
                     <Link
                         href="#demo"
                         className="px-8 py-3 rounded-full bg-white text-gray-700 font-semibold text-lg border border-gray-200 hover:border-whatsapp hover:text-whatsapp transition-all shadow-sm"
                     >
-                        View Demo
+                        {t('ctaSecondary')}
                     </Link>
                 </motion.div>
             </div>

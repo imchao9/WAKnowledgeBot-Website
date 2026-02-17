@@ -1,20 +1,22 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { motion, useScroll } from 'framer-motion';
+import { Link } from '@/navigation';
+import { useTranslations } from 'next-intl';
+import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-
-const navLinks = [
-    { name: 'Features', href: '#features' },
-    { name: 'Demo', href: '#demo' },
-    { name: 'Pricing', href: '#pricing' },
-];
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Navbar() {
+    const t = useTranslations('Navbar');
     const [isOpen, setIsOpen] = useState(false);
-    const { scrollY } = useScroll();
     const [isScrolled, setIsScrolled] = useState(false);
+
+    const navLinks = [
+        { name: t('features'), href: '#features' },
+        { name: t('demo'), href: '#demo' },
+        { name: t('pricing'), href: '#pricing' },
+    ];
 
     useEffect(() => {
         const updateScrolled = () => {
@@ -36,11 +38,11 @@ export default function Navbar() {
                 <div className="flex justify-between items-center h-16">
                     <div className="flex-shrink-0 flex items-center">
                         <Link href="/" className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-                            <span className="text-whatsapp">WA</span>KnowledgeBot
+                            <span className="text-whatsapp">WA</span>{t('brand')}
                         </Link>
                     </div>
 
-                    <div className="hidden md:block">
+                    <div className="hidden md:flex items-center gap-4">
                         <div className="ml-10 flex items-baseline space-x-8">
                             {navLinks.map((link) => (
                                 <Link
@@ -51,16 +53,20 @@ export default function Navbar() {
                                     {link.name}
                                 </Link>
                             ))}
+                        </div>
+                        <div className="flex items-center gap-4">
+                            <LanguageSwitcher />
                             <Link
                                 href="#pricing"
                                 className="bg-whatsapp hover:bg-whatsapp-dark text-white px-4 py-2 rounded-full text-sm font-medium transition-colors shadow-lg hover:shadow-xl"
                             >
-                                Get Started
+                                {t('getStarted')}
                             </Link>
                         </div>
                     </div>
 
-                    <div className="md:hidden">
+                    <div className="md:hidden flex items-center gap-4">
+                        <LanguageSwitcher />
                         <button
                             onClick={() => setIsOpen(!isOpen)}
                             className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-whatsapp focus:outline-none"
@@ -95,7 +101,7 @@ export default function Navbar() {
                             className="text-whatsapp hover:text-whatsapp-dark block px-3 py-2 rounded-md text-base font-medium"
                             onClick={() => setIsOpen(false)}
                         >
-                            Get Started
+                            {t('getStarted')}
                         </Link>
                     </div>
                 </motion.div>
