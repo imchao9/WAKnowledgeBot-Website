@@ -2,7 +2,9 @@
 
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
-import { loadStripe } from '@stripe/stripe-js';
+
+
+import { createCheckoutSession } from '@/app/actions';
 
 // Initialize Stripe (publishable key should be in env vars, but hardcoding placeholder for now or using env)
 // const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
@@ -12,6 +14,7 @@ const plans = [
         name: 'Starter',
         price: '$29',
         period: '/month',
+        priceId: 'price_starter_placeholder',
         description: 'Perfect for small businesses starting with AI.',
         features: [
             '500 Messages / month',
@@ -26,6 +29,7 @@ const plans = [
         name: 'Pro',
         price: '$99',
         period: '/month',
+        priceId: 'price_pro_placeholder',
         description: 'For growing teams needing multimodal capabilities.',
         features: [
             'Unlimited Messages',
@@ -41,6 +45,7 @@ const plans = [
         name: 'Enterprise',
         price: 'Custom',
         period: '',
+        priceId: 'price_enterprise_placeholder', // Contact sales usually, but for demo
         description: 'Tailored solutions for large organizations.',
         features: [
             'Custom Deployment',
@@ -54,11 +59,13 @@ const plans = [
 ];
 
 export default function Pricing() {
-    const handleCheckout = async (planName: string) => {
-        // Determine Price ID based on planName
-        // Call API to create checkout session
-        console.log('Checkout clicked for:', planName);
-        alert('Stripe Integration Pending: Checkout for ' + planName);
+    const handleCheckout = async (priceId: string) => {
+        if (priceId.includes('enterprise')) {
+            // Handle enterprise contact logic
+            console.log('Contact sales for Enterprise');
+            return;
+        }
+        await createCheckoutSession(priceId);
     };
 
     return (
@@ -110,10 +117,10 @@ export default function Pricing() {
                             </ul>
 
                             <button
-                                onClick={() => handleCheckout(plan.name)}
+                                onClick={() => handleCheckout(plan.priceId)}
                                 className={`w-full py-3 px-4 rounded-lg font-semibold transition-colors ${plan.popular
-                                        ? 'bg-whatsapp text-white hover:bg-whatsapp-dark shadow-md'
-                                        : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+                                    ? 'bg-whatsapp text-white hover:bg-whatsapp-dark shadow-md'
+                                    : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
                                     }`}
                             >
                                 {plan.cta}

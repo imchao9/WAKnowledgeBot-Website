@@ -59,7 +59,7 @@ export default function RAGVisualizer() {
                                 transition={{ delay: index * 0.2, duration: 0.5 }}
                                 viewport={{ once: true }}
                             >
-                                <div className="w-16 h-16 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-4">
+                                <div className="w-16 h-16 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-4 group-hover:bg-whatsapp/10 transition-colors">
                                     {step.icon}
                                 </div>
                                 <h3 className="text-lg font-bold text-gray-900 mb-2">{step.label}</h3>

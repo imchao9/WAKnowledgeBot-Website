@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Mic, Camera, Paperclip, Send, MoreVertical, Phone, Video } from 'lucide-react';
+import { Mic, Paperclip, MoreVertical, Phone, Video, Camera } from 'lucide-react';
 import Image from 'next/image';
 
 const messages = [
@@ -97,15 +97,23 @@ export default function WhatsAppSimulator() {
                                 >
                                     <div
                                         className={`max-w-[80%] rounded-lg p-3 shadow-sm text-sm relative ${msg.sender === 'user'
-                                                ? 'bg-[#d9fdd3] rounded-tr-none'
-                                                : 'bg-white rounded-tl-none'
+                                            ? 'bg-[#d9fdd3] rounded-tr-none'
+                                            : 'bg-white rounded-tl-none'
                                             }`}
                                     >
                                         {msg.type === 'text' && <p className="text-gray-800">{msg.content}</p>}
 
                                         {msg.type === 'image' && (
-                                            <div className="w-48 h-32 bg-gray-200 rounded mb-1 flex items-center justify-center text-gray-400 text-xs">
-                                                [Sales Chart Image]
+                                            <div className="w-48 h-32 bg-gray-100 rounded mb-1 flex flex-col items-center justify-center text-gray-400 border border-gray-200 overflow-hidden relative group">
+                                                <Image
+                                                    src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=400"
+                                                    alt="Sales Chart"
+                                                    fill
+                                                    className="object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                                                />
+                                                <div className="absolute inset-0 bg-black/5 flex items-center justify-center">
+                                                    <Camera className="w-8 h-8 text-white/50" />
+                                                </div>
                                             </div>
                                         )}
 

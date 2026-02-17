@@ -5,11 +5,11 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Points, PointMaterial, Line } from '@react-three/drei';
 import * as THREE from 'three';
 
-function Particles({ count = 100 }) {
+function Particles({ count = 200 }) {
     const points = useMemo(() => {
         const p = new Float32Array(count * 3);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         for (let i = 0; i < count; i++) {
-            // Random distribution in a sphere
             const theta = THREE.MathUtils.randFloatSpread(360);
             const phi = THREE.MathUtils.randFloatSpread(360);
             const r = 10 + Math.random() * 10; // Radius between 10 and 20
@@ -23,6 +23,7 @@ function Particles({ count = 100 }) {
             p[i * 3 + 2] = z;
         }
         return p;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [count]);
 
     const ref = useRef<THREE.Points>(null!);
@@ -71,9 +72,11 @@ function Connections({ count = 50 }) {
             }
         }
         return points;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [count]);
 
     const ref = useRef<THREE.Group>(null!);
+
     useFrame((state, delta) => {
         if (ref.current) {
             ref.current.rotation.x -= delta / 10;
@@ -82,17 +85,16 @@ function Connections({ count = 50 }) {
     });
 
     return (
-        <group ref={ref} rotation={[0, 0, Math.PI / 4]}>
-            {/* We render lines individually or as a segment? Line from drei takes points */}
+        <group ref={ref}>
             <Line
-                points={lines}       // Array of Vector3 or [[x,y,z], ...]
-                color="#00A884"                   // Default
-                opacity={0.2}
+                points={lines}
+                color="#00A884"
+                opacity={0.15}
                 transparent
-                lineWidth={1}                     // In pixels (default)
+                lineWidth={0.5}
             />
         </group>
-    )
+    );
 }
 
 export default function ParticleNetwork() {

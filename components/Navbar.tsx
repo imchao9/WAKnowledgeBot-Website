@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
 const navLinks = [
@@ -17,14 +17,16 @@ export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
-        return scrollY.onChange((latest) => {
-            setIsScrolled(latest > 50);
-        });
-    }, [scrollY]);
+        const updateScrolled = () => {
+            setIsScrolled(window.scrollY > 20);
+        };
+        window.addEventListener('scroll', updateScrolled);
+        return () => window.removeEventListener('scroll', updateScrolled);
+    }, []);
 
     return (
         <motion.nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-md shadow-sm' : 'bg-transparent'
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/90 backdrop-blur-md shadow-md py-2' : 'bg-transparent py-4'
                 }`}
             initial={{ y: -100 }}
             animate={{ y: 0 }}
